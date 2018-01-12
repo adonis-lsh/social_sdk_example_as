@@ -1,0 +1,82 @@
+[
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/vk_open_auth_dialog.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/vk_open_auth_dialog.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/com_facebook_login_fragment.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/com_facebook_login_fragment.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/vk_captcha_dialog.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/vk_captcha_dialog.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/umeng_socialize_oauth_dialog.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/umeng_socialize_oauth_dialog.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/umeng_check.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/umeng_check.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/umeng_share.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/umeng_share.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/app_shareadapter.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/app_shareadapter.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/com_facebook_activity_layout.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/com_facebook_activity_layout.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/umeng_menu.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/umeng_menu.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/umeng_socialize_share.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/umeng_socialize_share.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/activity_main.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/infodetail.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/infodetail.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/umeng_socialize_activity_kakao_webview.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/umeng_socialize_activity_kakao_webview.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/share_detail.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/share_detail.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/app_authadapter.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/app_authadapter.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/umeng_auth.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/umeng_auth.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/app_styleadapter.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/app_styleadapter.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/titlebar.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/titlebar.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/socialize_share_menu_item.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/socialize_share_menu_item.xml"
+    },
+    {
+        "merged": "/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/res/merged/debug/layout/vk_share_dialog.xml",
+        "source": "/Users/zl/Desktop/social_sdk_example_as/app/src/main/res/layout/vk_share_dialog.xml"
+    }
+]

@@ -1,0 +1,4 @@
+#Fri Jan 12 16:38:26 CST 2018
+base.0=/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+renamed.0=classes.dex
+file.0=/Users/zl/Desktop/social_sdk_example_as/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex

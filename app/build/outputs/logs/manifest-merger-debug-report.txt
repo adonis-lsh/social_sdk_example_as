@@ -1,0 +1,419 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:1:1-303:12
+	package
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:3:11-40
+		INJECTED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml
+	android:versionName
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:6:11-38
+		INJECTED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:2:11-57
+	android:versionCode
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:5:11-34
+		INJECTED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:1:11-69
+application
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:9:5-281:19
+	android:label
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:13:9-41
+	android:allowBackup
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:11:9-35
+	android:icon
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:12:9-56
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:10:9-28
+activity#com.umeng.soexample.HomeActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:15:9-26:20
+	android:screenOrientation
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:19:13-49
+	android:label
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:18:13-45
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:17:13-57
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:20:13-66
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:16:13-41
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:21:13-25:29
+action#android.intent.action.MAIN
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:22:17-68
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:22:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:24:17-76
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:24:27-74
+activity#com.umeng.soexample.ShareActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:27:9-34:20
+	android:screenOrientation
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:31:13-49
+	android:label
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:30:13-45
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:29:13-57
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:32:13-66
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:28:13-42
+activity#com.umeng.soexample.AuthActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:35:9-42:20
+	android:screenOrientation
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:39:13-49
+	android:label
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:38:13-45
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:37:13-57
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:40:13-66
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:36:13-41
+activity#com.umeng.soexample.GetInfoActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:43:9-50:20
+	android:screenOrientation
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:47:13-49
+	android:label
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:46:13-45
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:45:13-57
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:48:13-66
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:44:13-44
+activity#com.umeng.soexample.CheckActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:51:9-58:20
+	android:screenOrientation
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:55:13-49
+	android:label
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:54:13-45
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:53:13-57
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:56:13-66
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:52:13-42
+activity#com.umeng.soexample.ShareMenuActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:59:9-66:20
+	android:screenOrientation
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:63:13-49
+	android:label
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:62:13-45
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:61:13-57
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:64:13-66
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:60:13-46
+activity#com.umeng.soexample.InfoDetailActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:67:9-73:20
+	android:screenOrientation
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:71:13-49
+	android:label
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:70:13-45
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:69:13-57
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:72:13-66
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:68:13-47
+activity#com.umeng.soexample.ShareDetailActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:74:9-81:20
+	android:screenOrientation
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:78:13-49
+	android:label
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:77:13-45
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:76:13-57
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:79:13-66
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:75:13-48
+activity#com.umeng.socialize.media.WBShareCallBackActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:101:9-108:20
+	android:screenOrientation
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:107:13-49
+	android:launchMode
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:105:13-44
+	android:exported
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:106:13-37
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:103:13-63
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:104:13-72
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:102:13-77
+activity#com.sina.weibo.sdk.share.WbShareTransActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:110:9-119:20
+	android:launchMode
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:112:13-44
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:111:13-83
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:113:13-73
+intent-filter#android.intent.category.DEFAULT+com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:114:13-117:29
+action#com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:115:17-92
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:115:25-89
+category#android.intent.category.DEFAULT
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:116:17-76
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:116:27-73
+activity#com.umeng.soexample.yxapi.YXEntryActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:120:9-125:74
+	android:screenOrientation
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:124:13-49
+	android:exported
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:123:13-36
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:122:13-74
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:125:13-72
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:121:13-50
+activity#com.umeng.socialize.editorpage.ShareActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:128:9-132:15
+	android:excludeFromRecents
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:130:13-46
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:131:13-51
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:129:13-72
+activity#com.umeng.soexample.wxapi.WXEntryActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:134:9-139:74
+	android:screenOrientation
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:138:13-49
+	android:exported
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:137:13-36
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:136:13-74
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:139:13-72
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:135:13-50
+activity#com.umeng.soexample.ddshare.DDShareActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:141:9-147:74
+	android:screenOrientation
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:146:13-49
+	android:launchMode
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:145:13-48
+	android:exported
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:144:13-36
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:143:13-74
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:147:13-72
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:142:13-52
+activity#com.umeng.soexample.apshare.ShareEntryActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:149:9-154:74
+	android:screenOrientation
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:153:13-49
+	android:exported
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:152:13-36
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:151:13-74
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:154:13-72
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:150:13-55
+activity#com.vk.sdk.VKServiceActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:157:9-160:52
+	android:label
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:159:13-44
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:160:13-50
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:158:13-56
+activity#jp.line.android.sdk.activity.LineAuthCompleteActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:163:9-176:20
+	android:screenOrientation
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:167:13-47
+	android:exported
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:166:13-36
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:165:13-57
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:164:13-81
+intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:168:13-175:29
+action#android.intent.action.VIEW
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:169:17-68
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:169:25-66
+category#android.intent.category.BROWSABLE
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:172:17-77
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:172:27-75
+data
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:174:17-57
+	android:scheme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:174:23-55
+activity#com.kakao.auth.authorization.authcode.KakaoWebViewActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:177:9-94
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:177:19-92
+activity#jp.line.android.sdk.activity.WebLoginActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:179:9-184:20
+	android:screenOrientation
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:183:13-47
+	android:exported
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:182:13-37
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:181:13-57
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:180:13-73
+activity#com.umeng.qq.tencent.AuthActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:186:9-198:20
+	android:launchMode
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:188:13-44
+	android:noHistory
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:189:13-37
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:187:13-61
+activity#com.umeng.qq.tencent.AssistActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:199:9-203:74
+	android:screenOrientation
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:202:13-49
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:201:13-74
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:203:13-72
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:200:13-63
+uses-library#com.google.android.maps
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:222:9-224:39
+	android:required
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:224:13-37
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:223:13-51
+uses-library#android.test.runner
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:225:9-59
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:225:23-57
+activity#com.umeng.facebook.FacebookActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:227:9-231:74
+	android:label
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:230:13-45
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:229:13-96
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:231:13-72
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:228:13-63
+provider#com.umeng.facebook.FacebookContentProvider
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:233:9-236:38
+	android:authorities
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:235:13-91
+	android:exported
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:236:13-36
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:234:13-70
+meta-data#com.facebook.sdk.ApplicationId
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:238:9-241:15
+	android:value
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:240:13-52
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:239:13-58
+meta-data#jp.line.sdk.ChannelId
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:243:9-245:41
+	android:value
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:245:13-39
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:244:13-49
+meta-data#jp.line.sdk.AuthScheme
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:246:9-248:46
+	android:value
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:248:13-44
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:247:13-50
+activity#com.umeng.socialize.handler.TwitterWebActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:250:9-255:74
+	android:label
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:254:13-45
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:252:13-113
+	android:theme
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:255:13-72
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:251:13-74
+meta-data#UMENG_APPKEY
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:258:9-261:21
+	android:value
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:260:13-53
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:259:13-40
+meta-data#UMENG_CHANNEL
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:262:9-265:21
+	android:value
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:264:13-34
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:263:13-41
+activity#com.dropbox.client2.android.AuthActivity
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:268:9-280:20
+	android:launchMode
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:271:13-44
+	android:configChanges
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:270:13-57
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:269:13-68
+uses-sdk
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:283:5-285:11
+	tools:overrideLibrary
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:284:9-91
+	android:targetSdkVersion
+		INJECTED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:287:5-78
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:287:22-76
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:288:5-75
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:288:22-73
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:289:5-74
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:289:22-72
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:290:5-80
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:290:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:291:5-79
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:291:22-77
+uses-permission#android.permission.INTERNET
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:292:5-66
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:292:22-64
+uses-permission#android.permission.READ_LOGS
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:293:5-67
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:293:22-65
+uses-permission#android.permission.CALL_PHONE
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:294:5-68
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:294:22-66
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:295:5-78
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:295:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:296:5-80
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:296:22-78
+uses-permission#android.permission.GET_TASKS
+ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:297:5-67
+	android:name
+		ADDED from /Users/zl/Desktop/social_sdk_example_as/app/src/main/AndroidManifest.xml:297:22-65
