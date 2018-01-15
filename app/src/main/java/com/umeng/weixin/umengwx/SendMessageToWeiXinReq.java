@@ -2,16 +2,16 @@ package com.umeng.weixin.umengwx;
 
 import android.os.Bundle;
 
-public class SendMessageToWeiXinRequest extends BaseRequest {
+public class SendMessageToWeiXinReq extends BaseReq {
     private static final String e = "MicroMsg.SDK.SendAuth.Req";
     private static final int f = 1024;
     public String req_scope;
     public String req_state;
 
-    public SendMessageToWeiXinRequest() {
+    public SendMessageToWeiXinReq() {
     }
 
-    public SendMessageToWeiXinRequest(Bundle paramBundle) {
+    public SendMessageToWeiXinReq(Bundle paramBundle) {
         fromBundle(paramBundle);
     }
 

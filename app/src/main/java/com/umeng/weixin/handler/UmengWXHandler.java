@@ -24,11 +24,13 @@ import com.umeng.socialize.utils.ContextUtil;
 import com.umeng.socialize.utils.Log;
 import com.umeng.socialize.utils.SocializeUtils;
 import com.umeng.socialize.utils.UmengText;
-import com.umeng.weixin.umengwx.BaseResponse;
-import com.umeng.weixin.umengwx.IWxHandler;
-import com.umeng.weixin.umengwx.SendMessageToWeiXinRequest;
-import com.umeng.weixin.umengwx.WeChat;
-import com.umeng.weixin.umengwx.SendMessageToWeiXinResponse;
+import com.umeng.weixin.umengwx.ApiResp;
+import com.umeng.weixin.umengwx.BaseReq;
+import com.umeng.weixin.umengwx.BaseResp;
+import com.umeng.weixin.umengwx.IWXAPIEventHandler;
+import com.umeng.weixin.umengwx.SendMessageToWeiXinReq;
+import com.umeng.weixin.umengwx.WeApi;
+import com.umeng.weixin.umengwx.SendMessageToWeiXinResp;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -38,6 +40,7 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import static com.umeng.socialize.bean.SHARE_MEDIA.WEIXIN;
 
 public class UmengWXHandler extends UMSSOHandler {
     private WeixinPreferences mWeixinPreferences;
@@ -47,12 +50,12 @@ public class UmengWXHandler extends UMSSOHandler {
     public static final int WXSceneTimeline = 1;
     //微信收藏
     public static final int WXSceneFavorite = 2;
-    private WeChat weChat;
+    private WeApi mWeApi;
     private String VERSION = "6.4.6";
     private WXShareContent mWXShareContent;
-    private PlatformConfig.APPIDPlatform mAPPIDPlatform;
-    private SHARE_MEDIA mPlatform = SHARE_MEDIA.WEIXIN;
-    private UMAuthListener mUMAuthListener;
+    private PlatformConfig.APPIDPlatform config;
+    private SHARE_MEDIA mTarget = WEIXIN;
+    private UMAuthListener mAuthListener;
     private static final int REFRESH_TOKEN_EXPIRES = 604800;
     private static final int RESP_TYPE_AUTH = 1;
     private static final int RESP_TYPE_SHARE = 2;
@@ -69,14 +72,31 @@ public class UmengWXHandler extends UMSSOHandler {
     private static final String ERROR_CODE_TOKEN_FAIL = "40001";
     private static final String ERROR_CODE_TOKEN_REFESH_FAIL = "40030";
     private static final String ERROR_CODE_TOKEN_ACCESS_FAIL = "42002";
-    private IWxHandler mIWxHandler = new WxHandler(this);
+    private IWXAPIEventHandler mWxHandler = new IWXAPIEventHandler() {
+        @Override
+        public void onResp(BaseResp resp) {
+            int type = resp.getType();
+            switch(type) {
+                case RESP_TYPE_AUTH:
+                    onAuthCallback((SendMessageToWeiXinResp)resp);
+                    break;
+                case RESP_TYPE_SHARE:
+                    onShareCallback((ApiResp)resp);
+            }
+        }
+
+        @Override
+        public void onReq(BaseReq req) {
+
+        }
+    };
 
     public void onCreate(Context paramContext, PlatformConfig.Platform paramPlatform) {
         super.onCreate(paramContext, paramPlatform);
         this.mWeixinPreferences = new WeixinPreferences(paramContext.getApplicationContext(), "weixin");
-        this.mAPPIDPlatform = ((PlatformConfig.APPIDPlatform) paramPlatform);
-        this.weChat = new WeChat(paramContext.getApplicationContext(), this.mAPPIDPlatform.appId);
-        this.weChat.registerApp(this.mAPPIDPlatform.appId);
+        this.config = ((PlatformConfig.APPIDPlatform) paramPlatform);
+        this.mWeApi = new WeApi(paramContext.getApplicationContext(), this.config.appId);
+        this.mWeApi.registerApp(this.config.appId);
         Log.um("wechat simplify:" + this.VERSION);
     }
 
@@ -88,7 +108,7 @@ public class UmengWXHandler extends UMSSOHandler {
     }
 
     public boolean share(ShareContent shareContent, final UMShareListener umShareListener) {
-        this.mPlatform = this.mAPPIDPlatform.getName();
+        this.mTarget = this.config.getName();
         if (!isInstall()) {
             if (Config.isJumptoAppStore) {
                 Intent var4 = new Intent("android.intent.action.VIEW");
@@ -98,37 +118,39 @@ public class UmengWXHandler extends UMSSOHandler {
             QueuedWork.runInMain(new Runnable() {
                 @Override
                 public void run() {
-                    umShareListener.onError(mPlatform, new Throwable(UmengErrorCode.NotInstall.getMessage()));
+                    umShareListener.onError(mTarget, new Throwable(UmengErrorCode.NotInstall.getMessage()));
                 }
             });
             return false;
+        } else {
+            ShareContent wxShareContent = filterShareContent(shareContent);
+            this.mWXShareContent = new WXShareContent(wxShareContent);
+            if ((this.mWXShareContent.getmStyle() == 64) && ((this.mTarget == SHARE_MEDIA.WEIXIN_CIRCLE) || (this.mTarget == SHARE_MEDIA.WEIXIN_FAVORITE))) {
+                QueuedWork.runInMain(new Runnable() {
+                    @Override
+                    public void run() {
+                        umShareListener.onError(mTarget, new Throwable(UmengErrorCode.ShareDataTypeIllegal.getMessage() + UmengText.WX_CIRCLE_NOT_SUPPORT_EMOJ));
+                    }
+                });
+                Toast.makeText(getContext(), UmengText.WX_CIRCLE_NOT_SUPPORT_EMOJ, 0).show();
+                return false;
+            }
+            this.mUMShareListener = umShareListener;
+            return shareTo(new WXShareContent(shareContent));
         }
-        Object localObject = a(shareContent);
-        this.mWXShareContent = new WXShareContent((ShareContent) localObject);
-        if ((this.mWXShareContent != null) && (this.mWXShareContent.getmStyle() == 64) && ((this.mPlatform == SHARE_MEDIA.WEIXIN_CIRCLE) || (this.mPlatform == SHARE_MEDIA.WEIXIN_FAVORITE))) {
-            QueuedWork.runInMain(new Runnable() {
-                @Override
-                public void run() {
-                    umShareListener.onError(mPlatform, new Throwable(UmengErrorCode.ShareDataTypeIllegal.getMessage() + UmengText.WX_CIRCLE_NOT_SUPPORT_EMOJ));
-                }
-            });
-            Toast.makeText(getContext(), UmengText.WX_CIRCLE_NOT_SUPPORT_EMOJ, 0).show();
-            return false;
-        }
-        this.mUMShareListener = umShareListener;
-        return shareTo(new WXShareContent(shareContent));
+
     }
 
-    private ShareContent a(ShareContent paramShareContent) {
-        if ((paramShareContent.getShareType() == 128) && (getWXAppSupportAPI() < 620756993)) {
-            UMMin localUMMin = (UMMin) paramShareContent.mMedia;
+    private ShareContent filterShareContent(ShareContent shareContent) {
+        if ((shareContent.getShareType() == 128) && (getWXAppSupportAPI() < 620756993)) {
+            UMMin localUMMin = (UMMin) shareContent.mMedia;
             UMWeb localUMWeb = new UMWeb(localUMMin.toUrl());
             localUMWeb.setThumb(localUMMin.getThumbImage());
             localUMWeb.setDescription(localUMMin.getDescription());
             localUMWeb.setTitle(localUMMin.getTitle());
-            paramShareContent.mMedia = localUMWeb;
+            shareContent.mMedia = localUMWeb;
         }
-        return paramShareContent;
+        return shareContent;
     }
 
     public int getWXAppSupportAPI() {
@@ -143,37 +165,37 @@ public class UmengWXHandler extends UMSSOHandler {
         return i1;
     }
 
-    public boolean shareTo(WXShareContent params) {
-        final Bundle localBundle = params.getWxShareBundle();
-        localBundle.putString("_wxapi_basereq_transaction", c(this.mWXShareContent.getStrStyle()));
+    public boolean shareTo(WXShareContent wxShareContent) {
+        final Bundle localBundle = wxShareContent.getWxShareBundle();
+        localBundle.putString("_wxapi_basereq_transaction", buildTransaction(this.mWXShareContent.getStrStyle()));
         if (!TextUtils.isEmpty(localBundle.getString("error"))) {
             QueuedWork.runInMain(new Runnable() {
                 @Override
                 public void run() {
-                    mUMShareListener.onError(mPlatform, new Throwable(UmengErrorCode.UnKnowCode.getMessage() + localBundle.getString("error")));
+                    mUMShareListener.onError(mTarget, new Throwable(UmengErrorCode.UnKnowCode.getMessage() + localBundle.getString("error")));
                 }
             });
             return false;
         }
-        switch (mPlatform.ordinal()) {
-            case 1:
+        switch (mTarget) {
+            case WEIXIN:
                 localBundle.putInt("_wxapi_sendmessagetowx_req_scene", WXSceneSession);
                 break;
-            case 2:
+            case WEIXIN_CIRCLE:
                 localBundle.putInt("_wxapi_sendmessagetowx_req_scene", WXSceneTimeline);
                 break;
-            case 3:
+            case WEIXIN_FAVORITE:
                 localBundle.putInt("_wxapi_sendmessagetowx_req_scene", WXSceneFavorite);
                 break;
             default:
                 localBundle.putInt("_wxapi_sendmessagetowx_req_scene", WXSceneSession);
         }
-        this.weChat.pushare(localBundle);
+        this.mWeApi.pushare(localBundle);
         return true;
     }
 
     public boolean isInstall() {
-        return this.weChat.isWXAppInstalled();
+        return this.mWeApi.isWXAppInstalled();
     }
 
     public boolean isSupportAuth() {
@@ -185,21 +207,22 @@ public class UmengWXHandler extends UMSSOHandler {
         QueuedWork.runInMain(new Runnable() {
             @Override
             public void run() {
-                umAuthListener.onComplete(SHARE_MEDIA.WEIXIN, UMAuthListener.ACTION_DELETE, null);
+                umAuthListener.onComplete(WEIXIN, UMAuthListener.ACTION_DELETE, null);
             }
         });
     }
 
-    private boolean isRefreshToken() {
+    //生份验证是有效的
+    private boolean isAuthValid() {
         if (this.mWeixinPreferences != null) {
-            return this.mWeixinPreferences.isExpirereFreshToken();
+            return this.mWeixinPreferences.isAuthValid();
         }
         return false;
     }
 
-    private boolean isRefreshAccessToken() {
+    private boolean isAccessTokenAvailable() {
         if (this.mWeixinPreferences != null) {
-            return this.mWeixinPreferences.isExpireAccessToken();
+            return this.mWeixinPreferences.isAccessTokenAvailable();
         }
         return false;
     }
@@ -218,8 +241,8 @@ public class UmengWXHandler extends UMSSOHandler {
     }
 
     public void authorize(final UMAuthListener umAuthListener) {
-        this.mUMAuthListener = umAuthListener;
-        this.mPlatform = this.mAPPIDPlatform.getName();
+        this.mAuthListener = umAuthListener;
+        this.mTarget = this.config.getName();
         String refresh_token;
         if (!isInstall()) {
             if (Config.isJumptoAppStore) {
@@ -230,106 +253,107 @@ public class UmengWXHandler extends UMSSOHandler {
             QueuedWork.runInMain(new Runnable() {
                 @Override
                 public void run() {
-                    umAuthListener.onError(mPlatform, UMAuthListener.ACTION_AUTHORIZE, new Throwable(UmengErrorCode.NotInstall.getMessage()));
-                }
-            });
-            return;
-        }
-        if (isRefreshToken()) {
-            if (!isRefreshAccessToken()) {
-                //请求刷新refresh_token
-                refresh_token = getRefreshToken();
-                String localObject2 = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=" + this.mAPPIDPlatform.appId + "&grant_type=refresh_token&refresh_token=" + (String) refresh_token;
-                getResultBundle(localObject2);
-            }
-            refresh_token = getRefreshToken();
-            final Map<String,String> resultMap = toMap(refresh_token);
-            if ((( resultMap).containsKey(ERRORCODE)) && ((( ( resultMap).get(ERRORCODE)).equals(ERROR_CODE_TOKEN_REFESH_FAIL)) || (( resultMap).get("errcode")).equals(ERROR_CODE_TOKEN_ACCESS_FAIL))) {
-                clearWxCache();
-                authorize(umAuthListener);
-                return;
-            }
-//            QueuedWork.runInMain(new AuthCompleteRun(this, resultMap));
-            QueuedWork.runInMain(new Runnable() {
-                @Override
-                public void run() {
-                    mUMAuthListener.onComplete(SHARE_MEDIA.WEIXIN, UMAuthListener.ACTION_AUTHORIZE, resultMap);
+                    umAuthListener.onError(mTarget, UMAuthListener.ACTION_AUTHORIZE, new Throwable(UmengErrorCode.NotInstall.getMessage()));
                 }
             });
         } else {
-            SendMessageToWeiXinRequest weiXinRequest = new SendMessageToWeiXinRequest();
-             weiXinRequest.req_scope = sScope;
-            weiXinRequest.req_state = "123";
-            this.weChat.sendReq(weiXinRequest);
+            if (isAuthValid()) {
+                if (!isAccessTokenAvailable()) {
+                    //请求刷新refresh_token
+                    refresh_token = getRefreshToken();
+                    String url = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=" + this.config.appId + "&grant_type=refresh_token&refresh_token=" + (String) refresh_token;
+                    loadOauthData(url);
+                }
+                refresh_token = getRefreshToken();
+                final Map<String,String> resultMap = getAuthWithRefreshToken(refresh_token);
+                if ((( resultMap).containsKey(ERRORCODE)) && ((( ( resultMap).get(ERRORCODE)).equals(ERROR_CODE_TOKEN_REFESH_FAIL)) || (( resultMap).get("errcode")).equals(ERROR_CODE_TOKEN_ACCESS_FAIL))) {
+                    clearWxCache();
+                    authorize(umAuthListener);
+                    return;
+                }
+                QueuedWork.runInMain(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAuthListener.onComplete(WEIXIN, UMAuthListener.ACTION_AUTHORIZE, resultMap);
+                    }
+                });
+            } else {
+                SendMessageToWeiXinReq weiXinRequest = new SendMessageToWeiXinReq();
+                weiXinRequest.req_scope = sScope;
+                weiXinRequest.req_state = "123";
+                this.mWeApi.sendReq(weiXinRequest);
+            }
         }
+
     }
 
-    private void getResultBundle(String requestParams) {
-        String result = WXAuthUtils.request(requestParams);
-        Bundle localBundle = getParamBundle(result);
-        saveBundle(localBundle);
+    private void loadOauthData(String url) {
+        String response = WXAuthUtils.request(url);
+        Bundle localBundle = parseAuthData(response);
+        setBundle(localBundle);
     }
 
-    private Map<String,String> toMap(String paramString) {
-        StringBuilder localStringBuilder = new StringBuilder();
-        localStringBuilder.append("https://api.weixin.qq.com/sns/oauth2/refresh_token?");
-        localStringBuilder.append("appid=").append(this.mAPPIDPlatform.appId);
-        localStringBuilder.append("&grant_type=refresh_token");
-        localStringBuilder.append("&refresh_token=").append(paramString);
-        String str = WXAuthUtils.request(localStringBuilder.toString());
+    private Map<String,String> getAuthWithRefreshToken(String refresh_token) {
+        StringBuilder requestBuilfer = new StringBuilder();
+        requestBuilfer.append("https://api.weixin.qq.com/sns/oauth2/refresh_token?");
+        requestBuilfer.append("appid=").append(this.config.appId);
+        requestBuilfer.append("&grant_type=refresh_token");
+        requestBuilfer.append("&refresh_token=").append(refresh_token);
+        String result = WXAuthUtils.request(requestBuilfer.toString());
         Map<String,String> localMap = null;
         try {
-            localMap = SocializeUtils.jsonToMap(str);
+            localMap = SocializeUtils.jsonToMap(result);
             localMap.put("unionid", getUnionid());
         } catch (Exception localException) {
         }
         return localMap;
     }
 
-    private String c(String paramString) {
+    private String buildTransaction(String paramString) {
         return paramString + System.currentTimeMillis();
     }
 
-    public IWxHandler getWXEventHandler() {
-        return this.mIWxHandler;
+    public IWXAPIEventHandler getWXEventHandler() {
+        return this.mWxHandler;
     }
 
-    public WeChat getWXApi() {
-        return this.weChat;
+    public WeApi getWXApi() {
+        return this.mWeApi;
     }
 
-    protected void getResult(BaseResponse baseResponse) {
-        switch (baseResponse.wxErrorCode) {
+    protected void onShareCallback(BaseResp baseResp) {
+        Log.e("1111111111",baseResp.toString());
+        switch (baseResp.wxErrorCode) {
             case 0:
                 if (this.mUMShareListener != null) {
-                    this.mUMShareListener.onResult(this.mPlatform);
+                    this.mUMShareListener.onResult(this.mTarget);
                 }
                 break;
             case -2:
                 if (this.mUMShareListener != null) {
-                    this.mUMShareListener.onCancel(this.mPlatform);
+                    this.mUMShareListener.onCancel(this.mTarget);
                 }
                 break;
             case -3:
             case -1:
                 if (this.mUMShareListener != null) {
-                    this.mUMShareListener.onError(this.mPlatform, new Throwable(UmengErrorCode.ShareFailed.getMessage() + baseResponse.wxErrStr));
+                    this.mUMShareListener.onError(this.mTarget, new Throwable(UmengErrorCode.ShareFailed.getMessage() + baseResp.wxErrStr));
                 }
                 break;
             case -6:
                 if (this.mUMShareListener != null) {
-                    this.mUMShareListener.onError(this.mPlatform, new Throwable(UmengErrorCode.ShareFailed.getMessage() + UmengText.errorWithUrl(UmengText.AUTH_DENIED, "https://at.umeng.com/f8HHDi?cid=476")));
+                    this.mUMShareListener.onError(this.mTarget, new Throwable(UmengErrorCode.ShareFailed.getMessage() + UmengText.errorWithUrl(UmengText.AUTH_DENIED, "https://at.umeng.com/f8HHDi?cid=476")));
                 }
                 break;
             case -5:
                 if (this.mUMShareListener != null) {
-                    this.mUMShareListener.onError(this.mPlatform, new Throwable(UmengErrorCode.ShareFailed.getMessage() + UmengText.VERSION_NOT_SUPPORT));
+                    this.mUMShareListener.onError(this.mTarget, new Throwable(UmengErrorCode.ShareFailed.getMessage() + UmengText.VERSION_NOT_SUPPORT));
                 }
                 break;
             case -4:
             default:
                 if (this.mUMShareListener != null) {
-                    this.mUMShareListener.onError(this.mPlatform, new Throwable(UmengErrorCode.ShareFailed.getMessage() + baseResponse.wxErrStr));
+                    this.mUMShareListener.onError(this.mTarget, new Throwable(UmengErrorCode.ShareFailed.getMessage() + baseResp.wxErrStr));
                 }
                 break;
         }
@@ -339,93 +363,89 @@ public class UmengWXHandler extends UMSSOHandler {
         return "wxsession";
     }
 
-    protected void getResult(SendMessageToWeiXinResponse result) {
+    protected void onAuthCallback(SendMessageToWeiXinResp result) {
         if (result.wxErrorCode == 0) {
-            authRequest(result.resp_token, this.mUMAuthListener);
+            getAuthWithCode(result.resp_token, this.mAuthListener);
         } else if (result.wxErrorCode == -2) {
-            if (this.mUMAuthListener != null) {
-                this.mUMAuthListener.onCancel(SHARE_MEDIA.WEIXIN, UMAuthListener.ACTION_AUTHORIZE);
+            if (this.mAuthListener != null) {
+                this.mAuthListener.onCancel(WEIXIN, UMAuthListener.ACTION_AUTHORIZE);
             }
         } else if (result.wxErrorCode == -6) {
-            if (this.mUMAuthListener != null) {
-                this.mUMAuthListener.onError(SHARE_MEDIA.WEIXIN, UMAuthListener.ACTION_AUTHORIZE, new Throwable(UmengErrorCode.AuthorizeFailed.getMessage() + UmengText.errorWithUrl(UmengText.AUTH_DENIED, "https://at.umeng.com/f8HHDi?cid=476")));
+            if (this.mAuthListener != null) {
+                this.mAuthListener.onError(WEIXIN, UMAuthListener.ACTION_AUTHORIZE, new Throwable(UmengErrorCode.AuthorizeFailed.getMessage() + UmengText.errorWithUrl(UmengText.AUTH_DENIED, "https://at.umeng.com/f8HHDi?cid=476")));
             }
         } else {
             CharSequence localCharSequence = TextUtils.concat(new CharSequence[]{"weixin auth error (", String.valueOf(result.wxErrorCode), "):", result.wxErrStr});
-            if (this.mUMAuthListener != null) {
-                this.mUMAuthListener.onError(SHARE_MEDIA.WEIXIN, UMAuthListener.ACTION_AUTHORIZE, new Throwable(UmengErrorCode.AuthorizeFailed.getMessage() + localCharSequence.toString()));
+            if (this.mAuthListener != null) {
+                this.mAuthListener.onError(WEIXIN, UMAuthListener.ACTION_AUTHORIZE, new Throwable(UmengErrorCode.AuthorizeFailed.getMessage() + localCharSequence.toString()));
             }
         }
     }
 
     public void setAuthListener(UMAuthListener paramUMAuthListener) {
         super.setAuthListener(paramUMAuthListener);
-        this.mUMAuthListener = paramUMAuthListener;
+        this.mAuthListener = paramUMAuthListener;
     }
 
-    public Map getResultMap() {
+    public Map<String, String> getMap() {
         if (this.mWeixinPreferences != null) {
-            return this.mWeixinPreferences.getWxId();
+            return this.mWeixinPreferences.getmap();
         }
         return null;
     }
 
-    private void saveBundle(Bundle paramBundle) {
+    private void setBundle(Bundle paramBundle) {
         if (this.mWeixinPreferences != null) {
             this.mWeixinPreferences.setBundle(paramBundle).save();
         }
     }
 
-    private void authRequest(String code, final UMAuthListener umAuthListener) {
-        final StringBuilder requestParams = new StringBuilder();
-        requestParams.append("https://api.weixin.qq.com/sns/oauth2/access_token?");
-        requestParams.append("appid=").append(this.mAPPIDPlatform.appId);
-        requestParams.append("&secret=").append(this.mAPPIDPlatform.appkey);
-        requestParams.append("&code=").append(code);
-        requestParams.append("&grant_type=authorization_code");
-        //TODO 起点分析
-//        new Thread(new UMAuthRequestRun(this, localStringBuilder, umAuthListener)).start();
+    private void getAuthWithCode(String code, final UMAuthListener umAuthListener) {
+        final StringBuilder authURL = new StringBuilder();
+        authURL.append("https://api.weixin.qq.com/sns/oauth2/access_token?");
+        authURL.append("appid=").append(this.config.appId);
+        authURL.append("&secret=").append(this.config.appkey);
+        authURL.append("&code=").append(code);
+        authURL.append("&grant_type=authorization_code");
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String result = WXAuthUtils.request(requestParams.toString());
-                Map resultMap = null;
+                String response = WXAuthUtils.request(authURL.toString());
+                final Map map;
                 try {
-                    resultMap = SocializeUtils.jsonToMap(result);
-                    if ((resultMap == null) || (resultMap.size() == 0)) {
-                        getParamBundle(result);
+                    map = SocializeUtils.jsonToMap(response);
+                    if(map == null || map.size() == 0) {
+                        getMap();
                     }
-//            Bundle localBundle = UmengWXHandler.getResult(this.req_scope, result);
-//            UmengWXHandler.getResult(this.req_scope, localBundle);
-                    final Map localMap2 = resultMap;
-//            UmengWXHandler.getOpenid(this.req_scope, localBundle);
-//                    QueuedWork.runInMain(new AuthRun(this, localMap2));
+
+                    final Bundle bundle = parseAuthData(response);
+                    setBundle(bundle);
                     QueuedWork.runInMain(new Runnable() {
-                        @Override
                         public void run() {
-                            if (localMap2 != null) {
-                                if (localMap2.get("errcode") != null) {
-                                    Throwable localThrowable = new Throwable(UmengErrorCode.RequestForUserProfileFailed.getMessage() + (String) localMap2.get("errmsg"));
-                                    umAuthListener.onError(SHARE_MEDIA.WEIXIN, UMAuthListener.ACTION_AUTHORIZE, localThrowable);
+                            uploadAuthData(bundle);
+                            if(umAuthListener != null) {
+                                if(map.get("errcode") != null) {
+                                    umAuthListener.onError(WEIXIN, 0, new Throwable(UmengErrorCode.AuthorizeFailed.getMessage() + (String)map.get("errmsg")));
                                 } else {
-                                    umAuthListener.onComplete(SHARE_MEDIA.WEIXIN, UMAuthListener.ACTION_AUTHORIZE, localMap2);
+                                    umAuthListener.onComplete(WEIXIN, 0, map);
                                 }
                             }
+
                         }
                     });
-                } catch (Exception localException) {
+                } catch (Exception var5) {
                 }
             }
         }).start();
     }
 
-    public Bundle getParamBundle(String paramString) {
+    public Bundle parseAuthData(String response) {
         Bundle localBundle = new Bundle();
-        if (TextUtils.isEmpty(paramString)) {
+        if (TextUtils.isEmpty(response)) {
             return localBundle;
         }
         try {
-            JSONObject localJSONObject = new JSONObject(paramString);
+            JSONObject localJSONObject = new JSONObject(response);
             Iterator localIterator = localJSONObject.keys();
             String str = "";
             while (localIterator.hasNext()) {
@@ -443,7 +463,7 @@ public class UmengWXHandler extends UMSSOHandler {
         return localBundle;
     }
 
-    private Map getResultMap(String paramString) {
+    private Map parseUserInfo(String paramString) {
         HashMap<String,String> localHashMap = new HashMap();
         try {
             JSONObject localJSONObject = new JSONObject(paramString);
@@ -498,7 +518,7 @@ public class UmengWXHandler extends UMSSOHandler {
             if ((paramObject.equals("REFRESH_TOKEN_EXPIRES_KEY")) || (paramObject.equals("1")) || (paramObject.equals(UmengText.MAN))) {
                 return str1;
             }
-            if ((paramObject.equals("mPlatform")) || (paramObject.equals("2")) || (paramObject.equals(UmengText.WOMAN))) {
+            if ((paramObject.equals("mTarget")) || (paramObject.equals("2")) || (paramObject.equals(UmengText.WOMAN))) {
                 return str2;
             }
             return paramObject.toString();
@@ -562,17 +582,17 @@ public class UmengWXHandler extends UMSSOHandler {
             QueuedWork.runInMain(new Runnable() {
                 @Override
                 public void run() {
-                    umAuthListener.onError(SHARE_MEDIA.WEIXIN, RESP_TYPE_SHARE, new Throwable(UmengErrorCode.RequestForUserProfileFailed.getMessage() + result));
+                    umAuthListener.onError(WEIXIN, RESP_TYPE_SHARE, new Throwable(UmengErrorCode.RequestForUserProfileFailed.getMessage() + result));
                 }
             });
             return;
         }
-        final Map resultMap = getResultMap(result);
+        final Map resultMap = parseUserInfo(result);
         if (resultMap == null) {
             QueuedWork.runInMain(new Runnable() {
                 @Override
                 public void run() {
-                    umAuthListener.onError(SHARE_MEDIA.WEIXIN, UMAuthListener.ACTION_GET_PROFILE, new Throwable(UmengErrorCode.RequestForUserProfileFailed.getMessage() + result));
+                    umAuthListener.onError(WEIXIN, UMAuthListener.ACTION_GET_PROFILE, new Throwable(UmengErrorCode.RequestForUserProfileFailed.getMessage() + result));
                 }
             });
         } else if (resultMap.containsKey(ERRORCODE)) {
@@ -583,7 +603,7 @@ public class UmengWXHandler extends UMSSOHandler {
                 QueuedWork.runInMain(new Runnable() {
                     @Override
                     public void run() {
-                        umAuthListener.onError(SHARE_MEDIA.WEIXIN, UMAuthListener.ACTION_GET_PROFILE, new Throwable(UmengErrorCode.RequestForUserProfileFailed.getMessage() + resultMap.get(ERRORCODE)));
+                        umAuthListener.onError(WEIXIN, UMAuthListener.ACTION_GET_PROFILE, new Throwable(UmengErrorCode.RequestForUserProfileFailed.getMessage() + resultMap.get(ERRORCODE)));
                     }
                 });
             }
@@ -591,14 +611,22 @@ public class UmengWXHandler extends UMSSOHandler {
             QueuedWork.runInMain(new Runnable() {
                 @Override
                 public void run() {
-                    umAuthListener.onComplete(SHARE_MEDIA.WEIXIN, UMAuthListener.ACTION_GET_PROFILE, resultMap);
+                    umAuthListener.onComplete(WEIXIN, UMAuthListener.ACTION_GET_PROFILE, resultMap);
                 }
             });
         }
     }
 
+    public boolean isHasAuthListener() {
+        return this.mAuthListener != null;
+    }
+
+    public boolean isSupport() {
+        return mWeApi.isWXAppSupportAPI();
+    }
+
     public void release() {
         super.release();
-        this.mUMAuthListener = null;
+        this.mAuthListener = null;
     }
 }

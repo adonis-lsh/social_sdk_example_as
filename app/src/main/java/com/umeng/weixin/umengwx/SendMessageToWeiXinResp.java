@@ -2,7 +2,7 @@ package com.umeng.weixin.umengwx;
 
 import android.os.Bundle;
 
-public class SendMessageToWeiXinResponse extends BaseResponse {
+public class SendMessageToWeiXinResp extends BaseResp {
     private static final String j = "MicroMsg.SDK.SendAuth.Resp";
     private static final int k = 1024;
     public String resp_token;
@@ -11,10 +11,10 @@ public class SendMessageToWeiXinResponse extends BaseResponse {
     public String wxLang;
     public String wxCountry;
 
-    public SendMessageToWeiXinResponse() {
+    public SendMessageToWeiXinResp() {
     }
 
-    public SendMessageToWeiXinResponse(Bundle paramBundle) {
+    public SendMessageToWeiXinResp(Bundle paramBundle) {
         fromBundle(paramBundle);
     }
 

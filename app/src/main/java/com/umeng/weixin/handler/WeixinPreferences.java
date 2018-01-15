@@ -63,8 +63,8 @@ public class WeixinPreferences {
         return this.refresh_token;
     }
 
-    public Map getWxId() {
-        HashMap localHashMap = new HashMap();
+    public Map<String, String> getmap() {
+        HashMap<String, String> localHashMap = new HashMap();
         localHashMap.put("access_token", this.access_token);
         localHashMap.put("unionid", this.unionid);
         localHashMap.put("openid", this.openid);
@@ -73,7 +73,7 @@ public class WeixinPreferences {
         return localHashMap;
     }
 
-    public boolean isExpireAccessToken() {
+    public boolean isAccessTokenAvailable() {
         boolean bool = TextUtils.isEmpty(this.access_token);
         int i1 = this.expires_in - System.currentTimeMillis() <= 0L ? 1 : 0;
         return (!bool) && (i1 == 0);
@@ -88,7 +88,7 @@ public class WeixinPreferences {
     }
 
     //refresh_token是否到期
-    public boolean isExpirereFreshToken() {
+    public boolean isAuthValid() {
         boolean bool = TextUtils.isEmpty(this.refresh_token);
         int i1 = this.rt_expires_in - System.currentTimeMillis() <= 0L ? 1 : 0;
         return (!bool) && (i1 == 0);

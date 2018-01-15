@@ -61,7 +61,7 @@ public abstract class UMAPIShareHandler extends UMSSOHandler implements IEditor 
                             public void run() {
                                 ShareContent content = UMAPIShareHandler.this.getResult(holder.Content, extras);
                                 UMAPIShareHandler.this.sendShareRequest(content, holder.Listener);
-                                Log.d("act", "sent share request");
+                                Log.d("act", "sent share onReq");
                             }
                         }, true);
                     } else if (holder.Listener != null) {
@@ -141,7 +141,7 @@ public abstract class UMAPIShareHandler extends UMSSOHandler implements IEditor 
         if (resp == null) {
             QueuedWork.runInMain(new Runnable() {
                 public void run() {
-                    listener.onError(media, new Throwable(UmengErrorCode.ShareFailed.getMessage() + "response is null"));
+                    listener.onError(media, new Throwable(UmengErrorCode.ShareFailed.getMessage() + "onResp is null"));
                 }
             });
         } else if (!resp.isOk()) {

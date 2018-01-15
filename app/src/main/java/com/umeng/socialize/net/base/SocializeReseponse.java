@@ -57,7 +57,7 @@ public class SocializeReseponse
 
 
             if (this.mStCode == 0) {
-                Log.e("SocializeReseponse", "no status code in response.");
+                Log.e("SocializeReseponse", "no status code in onResp.");
                 return null;
             }
             this.mMsg = localJSONObject.optString("msg", "");

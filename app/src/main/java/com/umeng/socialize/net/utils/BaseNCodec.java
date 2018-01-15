@@ -131,7 +131,7 @@ public abstract class BaseNCodec {
     public Object encode(Object paramObject)
             throws Exception {
         if (!(paramObject instanceof byte[])) {
-            throw new Exception("Parameter supplied to ApiResponse-N encode is not BitmapUtil byte[]");
+            throw new Exception("Parameter supplied to ApiResp-N encode is not BitmapUtil byte[]");
         }
         return encode((byte[]) paramObject);
     }
@@ -149,7 +149,7 @@ public abstract class BaseNCodec {
         if ((paramObject instanceof String)) {
             return decode((String) paramObject);
         }
-        throw new Exception("Parameter supplied to ApiResponse-N decode is not BitmapUtil byte[] or BitmapUtil String");
+        throw new Exception("Parameter supplied to ApiResp-N decode is not BitmapUtil byte[] or BitmapUtil String");
     }
 
 

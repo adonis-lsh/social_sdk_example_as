@@ -2,12 +2,12 @@ package com.umeng.weixin.umengwx;
 
 import android.os.Bundle;
 
-public class ApiResponse extends BaseResponse{
-    public ApiResponse() {
+public class ApiResp extends BaseResp {
+    public ApiResp() {
     }
 
-    public ApiResponse(Bundle paramBundle) {
-
+    public ApiResp(Bundle bundle) {
+        fromBundle(bundle);
     }
 
     public int getType() {

@@ -2,7 +2,7 @@ package com.umeng.weixin.umengwx;
 
 import android.os.Bundle;
 
-public abstract class BaseResponse {
+public abstract class BaseResp {
     public int wxErrorCode;
     public String wxErrStr;
     public String wxTransaction;
@@ -26,4 +26,14 @@ public abstract class BaseResponse {
     }
 
     public abstract boolean check();
+
+    @Override
+    public String toString() {
+        return "BaseResp{" +
+                "wxErrorCode=" + wxErrorCode +
+                ", wxErrStr='" + wxErrStr + '\'' +
+                ", wxTransaction='" + wxTransaction + '\'' +
+                ", wxOpenId='" + wxOpenId + '\'' +
+                '}';
+    }
 }

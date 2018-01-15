@@ -130,9 +130,7 @@ public abstract class UMSSOHandler {
 
 
     public boolean isHasAuthListener() {
-
         return true;
-
     }
 
 
@@ -233,8 +231,7 @@ public abstract class UMSSOHandler {
     }
 
 
-    protected void uploadAuthData(final Bundle bundle)
-            throws SocializeException {
+    protected void uploadAuthData(final Bundle bundle) throws SocializeException {
         new Thread(new Runnable() {
             public void run() {
                 PlatformTokenUploadReq req = new PlatformTokenUploadReq(UMSSOHandler.this.getContext());

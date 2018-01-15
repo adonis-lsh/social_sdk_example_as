@@ -72,14 +72,14 @@ public class UrlUtil {
             Log.url("sina分享小贴士1", "为什么我使用精简版，网页授权认证失败", "https://at.umeng.com/CC0LLz?cid=476");
             Log.url("sina分享小贴士2", "为什么我使用精简版，授权不能成功或提示C8998", "https://at.umeng.com/KHDGXb?cid=476");
             Log.url("sina分享小贴士3", "为什么我没有回调", "https://at.umeng.com/9XXbCm?cid=476");
-            Log.url("sina分享小贴士4", "为什么我提示 Ip Limit, request ip is not", "https://at.umeng.com/GPruqi?cid=476");
+            Log.url("sina分享小贴士4", "为什么我提示 Ip Limit, onReq ip is not", "https://at.umeng.com/GPruqi?cid=476");
         }
 
         if ((paramSHARE_MEDIA == SHARE_MEDIA.SINA) && (!Config.isUmengSina.booleanValue())) {
             Log.url("sina分享小贴士1", "为什么我的com.sina.weibo.sdk.net.DownloadService报红？", "https://at.umeng.com/HL1T9j?cid=476");
             Log.url("sina分享小贴士1", "为什么我使用完整版，授权不能成功或提示C8998", "https://at.umeng.com/4v4XPn?cid=476");
             Log.url("sina分享小贴士3", "为什么我没有回调", "https://at.umeng.com/9XXbCm?cid=476");
-            Log.url("sina分享小贴士4", "为什么我提示 Ip Limit, request ip is not", "https://at.umeng.com/GPruqi?cid=476");
+            Log.url("sina分享小贴士4", "为什么我提示 Ip Limit, onReq ip is not", "https://at.umeng.com/GPruqi?cid=476");
         }
     }
 
@@ -98,7 +98,7 @@ public class UrlUtil {
             Log.url("sina授权小贴士1", "为什么我使用精简版，网页授权认证失败", "https://at.umeng.com/CC0LLz?cid=476");
             Log.url("sina授权小贴士2", "为什么我使用精简版，授权不能成功或提示C8998", "https://at.umeng.com/KHDGXb?cid=476");
             Log.url("sina授权小贴士3", "为什么我没有回调", "https://at.umeng.com/9XXbCm?cid=476");
-            Log.url("sina授权小贴士4", "为什么我提示 Ip Limit, request ip is not", "https://at.umeng.com/GPruqi?cid=476");
+            Log.url("sina授权小贴士4", "为什么我提示 Ip Limit, onReq ip is not", "https://at.umeng.com/GPruqi?cid=476");
         }
 
 
@@ -106,7 +106,7 @@ public class UrlUtil {
             Log.url("sina授权小贴士1", "为什么我的com.sina.weibo.sdk.net.DownloadService报红？", "https://at.umeng.com/HL1T9j?cid=476");
             Log.url("sina授权小贴士1", "为什么我使用完整版，授权不能成功或提示C8998", "https://at.umeng.com/4v4XPn?cid=476");
             Log.url("sina授权小贴士3", "为什么我没有回调", "https://at.umeng.com/9XXbCm?cid=476");
-            Log.url("sina授权小贴士4", "为什么我提示 Ip Limit, request ip is not", "https://at.umeng.com/GPruqi?cid=476");
+            Log.url("sina授权小贴士4", "为什么我提示 Ip Limit, onReq ip is not", "https://at.umeng.com/GPruqi?cid=476");
         }
     }
 }

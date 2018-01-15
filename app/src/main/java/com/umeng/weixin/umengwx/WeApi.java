@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 
-public class WeChat {
+public class WeApi {
     private Context mContext;
     private String appid;
     private boolean c = false;
 
-    public WeChat(Context paramContext, String appid) {
+    public WeApi(Context paramContext, String appid) {
         this.mContext = paramContext;
         this.appid = appid;
     }
@@ -43,12 +43,12 @@ public class WeChat {
         return false;
     }
 
-    public final boolean sendReq(BaseRequest baseRequest) {
-        if (!baseRequest.check()) {
+    public final boolean sendReq(BaseReq baseReq) {
+        if (!baseReq.check()) {
             return false;
         }
         Bundle localBundle = new Bundle();
-        baseRequest.toBundle(localBundle);
+        baseReq.toBundle(localBundle);
         launchShare(localBundle);
         return true;
     }
@@ -69,7 +69,6 @@ public class WeChat {
         localIntent.putExtra("_mmessage_appPackage", packageName);
         localIntent.putExtra("_mmessage_content", "weixin://sendreq?appid=" + this.appid);
         localIntent.putExtra("_mmessage_checksum", CheckSumUtil.checkSum("weixin://sendreq?appid=" + this.appid, 620756993, packageName));
-//        localIntent.addFlags(268435456).addFlags(134217728);
         localIntent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND).addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
         try {
             this.mContext.startActivity(localIntent);
@@ -83,16 +82,16 @@ public class WeChat {
         return true;
     }
 
-    public final boolean handleIntent(Intent paramIntent, IWxHandler iWxHandler) {
+    public final boolean handleIntent(Intent intent, IWXAPIEventHandler eventHandler) {
         try {
-            switch (paramIntent.getIntExtra("_wxapi_command_type", 0)) {
+            switch (intent.getIntExtra("_wxapi_command_type", 0)) {
                 case 1:
-                    SendMessageToWeiXinResponse sendMessageToWeiXinResponse = new SendMessageToWeiXinResponse(paramIntent.getExtras());
-                    iWxHandler.response(sendMessageToWeiXinResponse);
+                    SendMessageToWeiXinResp sendMessageToWeiXinResponse = new SendMessageToWeiXinResp(intent.getExtras());
+                    eventHandler.onResp(sendMessageToWeiXinResponse);
                     return true;
                 case 2:
-                    ApiResponse apiResponse = new ApiResponse(paramIntent.getExtras());
-                    iWxHandler.response(apiResponse);
+                    ApiResp apiResponse = new ApiResp(intent.getExtras());
+                    eventHandler.onResp(apiResponse);
                     return true;
                 case 3:
                     return true;

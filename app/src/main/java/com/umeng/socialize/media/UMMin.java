@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class UMMin
-        extends BaseMediaObject {
+public class UMMin extends BaseMediaObject {
     private String f;
     private String g;
 
@@ -54,9 +53,3 @@ public class UMMin
         return null;
     }
 }
-
-
-/* Location:              /Users/zl/Desktop/未命名文件夹 3/umeng_social_net.jar!/com/umeng/socialize/media/UMMin.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       0.7.1
- */

@@ -2,7 +2,7 @@ package com.umeng.weixin.umengwx;
 
 import android.os.Bundle;
 
-public abstract class BaseRequest{
+public abstract class BaseReq {
     public String wxTransaction;
     public String wxOpenid;
 
